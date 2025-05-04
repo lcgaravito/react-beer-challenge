@@ -4,7 +4,36 @@ const products = require("../data/products");
 const stockPrice = require("../data/stock-price.js");
 
 router.get("/products", (req, res) => {
-  res.json(products);
+  const productsWithStockPrice = products.map((product) => {
+    const skusWithStockPrice = product.skus.map((sku) => {
+      const stockPriceFound = stockPrice[sku.code];
+      return {
+        ...sku,
+        stock: stockPriceFound ? stockPriceFound.stock : null,
+        price: stockPriceFound ? stockPriceFound.price : null,
+      };
+    });
+
+    const availableSkus = skusWithStockPrice.filter(
+      (sku) => sku.stock > 0 && sku.price !== null
+    );
+    const minPriceSku = availableSkus.reduce((min, sku) => {
+      return !min || sku.price < min.price ? sku : min;
+    }, null);
+
+    return {
+      ...product,
+      skus: skusWithStockPrice,
+      minPriceSku: minPriceSku
+        ? {
+            code: minPriceSku.code,
+            name: minPriceSku.name,
+            price: minPriceSku.price,
+          }
+        : null,
+    };
+  });
+  res.json(productsWithStockPrice);
 });
 
 router.get("/products/:id", (req, res) => {

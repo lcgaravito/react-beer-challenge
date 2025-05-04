@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router";
+import userImg from "../assets/icons/User.jpg";
+import menuIcon from "../assets/icons/menu-icon.svg";
+import { ProductCard } from "../components";
 
 const ProductListPage = () => {
   const [data, setData] = useState([]);
@@ -24,29 +26,35 @@ const ProductListPage = () => {
 
   return (
     <div>
-      <h1>ProductListPage</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quia
-        maiores ex laborum fugit repudiandae qui ad atque ea eius illum quis
-        nesciunt nam quibusdam incidunt aliquid, tempore cum hic?
-      </p>
-      {data.length > 0 ? (
-        <ul>
-          {data.map((product) => (
-            <li key={product.id}>
-              <Link
-                to={`/products/${product.id}-${product.brand
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-              >
-                {product.brand}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Loading products...</p>
-      )}
+      <div className="flex justify-between items-center">
+        <button
+          type="button"
+          className="flex flex-col cursor-pointer rounded-lg p-2 shadow-md hover:shadow-xl"
+        >
+          <img src={menuIcon} alt="Menu Icon" width={24} height={24} />
+        </button>
+        <img
+          className="rounded-full"
+          src={userImg}
+          alt="Logo"
+          width={40}
+          height={40}
+        />
+      </div>
+      <div className="mt-8">
+        <p className="text-gray-500">Hi Mr. Michael,</p>
+        <h1 className="text-2xl mb-2">Welcome Back!</h1>
+        <p className="font-bold mb-2">Our Products</p>
+        {data.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {data.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <p>Loading products...</p>
+        )}
+      </div>
     </div>
   );
 };
