@@ -31,19 +31,27 @@ Ensure you have the following installed:
    cd frontend
    ```
 
-2. Install dependencies:
+2. Create the `.env` file based on the template:
+
+   ```bash
+   cp .env.template .env
+   ```
+
+   You can modify the `VITE_API_URL` in the `.env` file if your backend is running on a different URL.
+
+3. Install dependencies:
 
    ```bash
    npm install
    ```
 
-3. Start the development server:
+4. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-4. Open your browser and navigate to:
+5. Open your browser and navigate to:
    ```
    http://localhost:5173
    ```
@@ -52,10 +60,25 @@ Ensure you have the following installed:
 
 ```
 frontend/
+├── public/        # Static assets (e.g., images, icons)
 ├── src/           # React components and logic
-├── public/        # Static assets
+│   ├── assets/     # Dynamic assets (e.g., images, icons)
+│   ├── components/ # Reusable React components
+│   ├── pages/      # Page-level components
+│   ├── App.jsx     # Main React component
+│   └── main.jsx    # Entry point for the React app
+├── .env.template  # Environment variable template
+├── .env           # Environment variables (ignored by Git)
+├── index.html     # HTML template for the app
+├── vite.config.js # Vite configuration file
 └── README.md      # Frontend README
 ```
+
+## Environment Variables
+
+The `.env` file is used to configure environment-specific variables. The following variable is required:
+
+- `VITE_API_URL`: The base URL for the backend API (e.g., `http://localhost:8080/api`).
 
 ## License
 
