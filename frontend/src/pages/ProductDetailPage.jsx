@@ -116,7 +116,7 @@ const ProductDetailPage = () => {
                 <h1>{data.brand}</h1>
                 <p>
                   Origin: {data.origin} | Stock:{" "}
-                  <span>{stockPrice?.stock}</span>
+                  <span>{Math.max(stockPrice?.stock, 0) || 0} </span>
                   <span
                     className="updating-text"
                     style={{
@@ -194,7 +194,7 @@ const ProductDetailPage = () => {
                 <img src={bagIcon} alt="Bag Icon" width={24} height={24} />
               </button>
               <button
-                disabled={!stockPrice?.stock}
+                disabled={!stockPrice?.stock || stockPrice?.stock <= 0}
                 className="btn btn-primary"
                 onClick={() =>
                   window.alert(
@@ -212,7 +212,7 @@ const ProductDetailPage = () => {
                   )
                 }
               >
-                {stockPrice?.stock ? "Add to Cart" : "Out of Stock"}
+                {stockPrice?.stock > 0 ? "Add to Cart" : "Out of Stock"}
               </button>
             </div>
           </div>
