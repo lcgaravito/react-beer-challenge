@@ -10,12 +10,15 @@
   line-height: 1.5;
 
   color: #213547;
-  background-color: #ffffff;
+  background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary: #ff9f24;
+  --gray: #969696;
 }
 
 h1,

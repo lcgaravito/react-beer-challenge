@@ -25,11 +25,11 @@ const ProductListPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <div className="flex justify-between items-center">
         <button
           type="button"
-          className="flex flex-col cursor-pointer rounded-lg p-2 shadow-md hover:shadow-xl"
+          className="flex flex-col bg-white cursor-pointer rounded-lg p-2 shadow-md hover:shadow-xl"
         >
           <img src={menuIcon} alt="Menu Icon" width={24} height={24} />
         </button>

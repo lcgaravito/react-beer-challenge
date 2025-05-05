@@ -40,6 +40,26 @@ router.get("/products/:id", (req, res) => {
   const productId = parseInt(req.params.id, 10);
   const product = products.find((item) => item.id === productId);
   if (product) {
+    const skusWithStockPrice = product.skus.map((sku) => {
+      const stockPriceFound = stockPrice[sku.code];
+      return {
+        ...sku,
+        stock: stockPriceFound ? stockPriceFound.stock : null,
+        price: stockPriceFound ? stockPriceFound.price : null,
+      };
+    });
+    const availableSkus = skusWithStockPrice.filter(
+      (sku) => sku.stock > 0 && sku.price !== null
+    );
+    const minPriceSku = availableSkus.reduce((min, sku) => {
+      return !min || sku.price < min.price ? sku : min;
+    }, null);
+    product.minPriceSku = minPriceSku
+      ? {
+          code: minPriceSku.code,
+          name: minPriceSku.name,
+        }
+      : null;
     res.json(product);
   } else {
     res.status(404).json({ message: "Product not found" });
