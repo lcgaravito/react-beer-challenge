@@ -37,6 +37,20 @@ const ProductCard = ({ product }) => {
         <button
           type="button"
           className="flex flex-col cursor-pointer rounded-tl-lg rounded-br-lg p-2 shadow-md hover:shadow-xl bg-orange-400 hover:bg-orange-500"
+          onClick={(e) => {
+            e.stopPropagation();
+            window.alert(
+              `Add ${product.brand} to cart with price ${Intl.NumberFormat(
+                "en-US",
+                {
+                  style: "currency",
+                  currency: "USD",
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              ).format(Number(product.minPriceSku.price) * 0.01)}`
+            );
+          }}
         >
           <img src={plusIcon} alt="Menu Icon" width={24} height={24} />
         </button>

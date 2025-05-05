@@ -1,4 +1,4 @@
-# React Beer Challenge
+# 🍺 React Beer Challenge
 
 This is a full-stack web application designed to showcase a list of beer products with dynamic stock and pricing information. It consists of two main parts:
 

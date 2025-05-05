@@ -30,11 +30,17 @@ const ProductListPage = () => {
         <button
           type="button"
           className="flex flex-col bg-white cursor-pointer rounded-lg p-2 shadow-md hover:shadow-xl"
+          onClick={() => {
+            window.alert("Menu button clicked");
+          }}
         >
           <img src={menuIcon} alt="Menu Icon" width={24} height={24} />
         </button>
         <img
-          className="rounded-full"
+          className="cursor-pointer rounded-full shadow-md hover:shadow-xl"
+          onClick={() => {
+            window.alert("User profile clicked");
+          }}
           src={userImg}
           alt="Logo"
           width={40}

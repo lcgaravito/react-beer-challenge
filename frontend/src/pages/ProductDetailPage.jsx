@@ -96,7 +96,11 @@ const ProductDetailPage = () => {
           <img src={backIcon} alt="Menu Icon" width={24} height={24} />
         </button>
         <p className="nav-title">Detail</p>
-        <button type="button" className="btn">
+        <button
+          type="button"
+          className="btn"
+          onClick={() => window.alert("Menu")}
+        >
           <img src={moreIcon} alt="Menu Icon" width={24} height={24} />
         </button>
       </div>
@@ -168,10 +172,46 @@ const ProductDetailPage = () => {
               ))}
             </div>
             <div className="product-actions">
-              <button type="button" className="btn btn-primary-outline">
+              <button
+                type="button"
+                className="btn btn-primary-outline"
+                onClick={() =>
+                  window.alert(
+                    `Add ${
+                      data.brand
+                    } - Size: ${selectedSKU} - Price:  ${Intl.NumberFormat(
+                      "en-US",
+                      {
+                        style: "currency",
+                        currency: "USD",
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }
+                    ).format(Number(stockPrice?.price) * 0.01)} to bag`
+                  )
+                }
+              >
                 <img src={bagIcon} alt="Bag Icon" width={24} height={24} />
               </button>
-              <button disabled={!stockPrice?.stock} className="btn btn-primary">
+              <button
+                disabled={!stockPrice?.stock}
+                className="btn btn-primary"
+                onClick={() =>
+                  window.alert(
+                    `Add ${
+                      data.brand
+                    } - Size: ${selectedSKU} - Price:  ${Intl.NumberFormat(
+                      "en-US",
+                      {
+                        style: "currency",
+                        currency: "USD",
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }
+                    ).format(Number(stockPrice?.price) * 0.01)} to cart`
+                  )
+                }
+              >
                 {stockPrice?.stock ? "Add to Cart" : "Out of Stock"}
               </button>
             </div>
