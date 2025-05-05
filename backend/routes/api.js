@@ -1,9 +1,24 @@
-const express = require("express");
-const router = express.Router();
-const products = require("../data/products");
-const stockPrice = require("../data/stock-price.js");
+import express from "express";
+import products from "../data/products.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
-router.get("/products", (req, res) => {
+const router = express.Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Function to load dynamically stock-price.js
+const getStockPrice = async () => {
+  const filePath = path.resolve(__dirname, "../data/stock-price.js");
+  const { default: stockPrice } = await import(
+    filePath + `?cacheBust=${Date.now()}`
+  ); // Avoid cache
+  return stockPrice;
+};
+
+router.get("/products", async (req, res) => {
+  const stockPrice = await getStockPrice(); // Load updated data
   const productsWithStockPrice = products.map((product) => {
     const skusWithStockPrice = product.skus.map((sku) => {
       const stockPriceFound = stockPrice[sku.code];
@@ -36,7 +51,8 @@ router.get("/products", (req, res) => {
   res.json(productsWithStockPrice);
 });
 
-router.get("/products/:id", (req, res) => {
+router.get("/products/:id", async (req, res) => {
+  const stockPrice = await getStockPrice(); // Load updated data
   const productId = parseInt(req.params.id, 10);
   const product = products.find((item) => item.id === productId);
   if (product) {
@@ -66,7 +82,8 @@ router.get("/products/:id", (req, res) => {
   }
 });
 
-router.get("/stock-price/:sku", (req, res) => {
+router.get("/stock-price/:sku", async (req, res) => {
+  const stockPrice = await getStockPrice(); // Load updated data
   const sku = req.params.sku;
   const stockPriceFound = stockPrice[sku];
   if (!stockPriceFound) {
@@ -75,4 +92,4 @@ router.get("/stock-price/:sku", (req, res) => {
   res.json(stockPriceFound);
 });
 
-module.exports = router;
+export default router;

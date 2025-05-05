@@ -57,6 +57,34 @@ const ProductDetailPage = () => {
     fetchStockPrice();
   }, [selectedSKU]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const fetchStockPrice = async () => {
+        if (selectedSKU) {
+          try {
+            setLoadingStockPrice(true);
+            const response = await fetch(
+              import.meta.env.VITE_API_URL + "/stock-price/" + selectedSKU
+            );
+            const stockPriceData = await response.json();
+            setStockPrice(stockPriceData);
+          } catch (error) {
+            console.error("Error fetching stock price:", error);
+          } finally {
+            // Set loading state to false after fetching after 1 second to simulate loading
+            setTimeout(() => {
+              setLoadingStockPrice(false);
+            }, 1000);
+          }
+        }
+      };
+
+      fetchStockPrice();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [selectedSKU]);
+
   return (
     <div className="product-detail-page">
       <div className="nav-bar">
@@ -84,16 +112,19 @@ const ProductDetailPage = () => {
                 <h1>{data.brand}</h1>
                 <p>
                   Origin: {data.origin} | Stock:{" "}
-                  <span className={loadingStockPrice ? "skeleton" : ""}>
-                    {stockPrice?.stock}
+                  <span>{stockPrice?.stock}</span>
+                  <span
+                    className="updating-text"
+                    style={{
+                      opacity: loadingStockPrice ? 1 : 0,
+                    }}
+                  >
+                    {" "}
+                    ⏳ Updating...
                   </span>
                 </p>
               </div>
-              <div
-                className={`product-price ${
-                  loadingStockPrice ? "skeleton" : ""
-                }`}
-              >
+              <div className={"product-price"}>
                 <h2>
                   {stockPrice?.price
                     ? Intl.NumberFormat("en-US", {

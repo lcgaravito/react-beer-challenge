@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     id: 127,
     brand: "Modelo Especial",
