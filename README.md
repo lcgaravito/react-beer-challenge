@@ -7,15 +7,15 @@ This is a full-stack web application designed to showcase a list of beer product
 
 ## Desktop Screenshots
 
-![Product Listing Page Desktop](https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/PLP-desktop-screenshot.png "Product Listing Page Desktop")
+![Product Listing Page Desktop](https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/screenshots/PLP-desktop-screenshot.png?raw=true "Product Listing Page Desktop")
 
-![Product Details Page Desktop](https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/PDP-desktop-screenshot.png "Product Details Page Desktop")
+![Product Details Page Desktop](https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/screenshots/PDP-desktop-screenshot.png?raw=true "Product Details Page Desktop")
 
 ## Mobile Screenshots
 
 <div style="display: flex; flex-wrap: wrap;">
-   <img src="https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/PLP-mobile-screenshot.png" alt="Product Listing Page Mobile" width="300" height="auto">
-   <img src="https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/PDP-mobile-screenshot.png" alt="Product Details Page Mobile" width="300" height="auto">
+   <img src="https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/screenshots/PLP-mobile-screenshot.png?raw=true" alt="Product Listing Page Mobile" width="300" height="auto">
+   <img src="https://raw.githubusercontent.com/lcgaravito/react-beer-challenge/refs/heads/main/screenshots/PDP-mobile-screenshot.png?raw=true" alt="Product Details Page Mobile" width="300" height="auto">
 </div>
 
 ## Project Structure
